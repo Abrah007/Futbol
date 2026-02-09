@@ -2,8 +2,8 @@ import { createClient } from '@supabase/supabase-js';
 import { Player, Match } from '../types';
 
 // --- CONFIGURACIÓN DE SUPABASE ---
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL || ''; 
-const SUPABASE_KEY = process.env.VITE_SUPABASE_KEY || '';
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL || 'https://frykdjywsipexvsdoovq.supabase.co'; 
+const SUPABASE_KEY = process.env.VITE_SUPABASE_KEY || 'sb_publishable_WWHkNJpHWf_T9HT-xTAAgw_lVcVwobv';
 
 let supabase: any = null;
 
