@@ -1,19 +1,22 @@
 export enum Position {
   GK = 'Portero',
   DEF = 'Defensa',
-  MID = 'Mediocampista',
+  MID = 'Mediocampo',
   FWD = 'Delantero'
 }
 
 export interface Player {
   id: string;
   name: string;
-  nickname?: string; // Apodo opcional
+  nickname?: string;
+  photoUrl?: string; // New field for player image
   position: Position;
-  // Manual overrides or historical data
+  // Since we removed matches, these serve as the main stats
   initialGoals?: number;
   initialAssists?: number;
   initialMatches?: number;
+  initialSaves?: number;      // Paradas
+  initialClearances?: number; // Despejes
 }
 
 export enum EventType {
@@ -25,10 +28,11 @@ export enum EventType {
   SUBSTITUTION = 'Sustitución'
 }
 
+// Kept for compatibility if DB has old match data, though not used in UI
 export interface MatchEvent {
   id: string;
   matchId: string;
-  side: 'home' | 'away'; // To know which side scored without teamId lookup
+  side: 'home' | 'away';
   playerId: string;
   assistPlayerId?: string;
   type: EventType;
@@ -38,14 +42,10 @@ export interface MatchEvent {
 
 export interface Match {
   id: string;
-  // Custom names for this specific pickup game (e.g. "Rojos" vs "Azules")
   homeTeamName: string; 
   awayTeamName: string;
-  
-  // Lists of player IDs participating in this match
   homePlayerIds: string[];
   awayPlayerIds: string[];
-
   homeScore: number;
   awayScore: number;
   date: string;

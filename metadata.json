@@ -1,5 +1,5 @@
 {
-  "name": "GolStats AI",
-  "description": "Gestor de estadísticas de fútbol con análisis táctico impulsado por Gemini AI.",
+  "name": "Estadísticas Futbol Poli",
+  "description": "Gestor de estadísticas de fútbol.",
   "requestFramePermissions": []
 }
