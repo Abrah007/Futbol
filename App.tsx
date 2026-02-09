@@ -75,22 +75,6 @@ const processImage = (file: File): Promise<string> => {
   });
 };
 
-// --- Helper: Position Colors ---
-const getPositionGradient = (position: Position) => {
-  switch (position) {
-    case Position.GK:
-      return 'from-purple-600 to-indigo-900'; // Portero
-    case Position.DEF:
-      return 'from-blue-600 to-slate-800';   // Defensa
-    case Position.MID:
-      return 'from-emerald-500 to-teal-800'; // Mediocampista
-    case Position.FWD:
-      return 'from-rose-500 to-red-900';     // Delantero
-    default:
-      return 'from-gray-500 to-gray-800';
-  }
-};
-
 // --- Main App ---
 
 export default function App() {
@@ -517,7 +501,7 @@ export default function App() {
            return (
             <Card key={player.id} className="p-0 overflow-hidden flex flex-col group hover:shadow-lg transition-all relative">
               {/* Header */}
-              <div className={`relative h-24 bg-gradient-to-br ${getPositionGradient(player.position)}`}>
+              <div className={`relative h-24 bg-gradient-to-br ${isGK ? 'from-purple-600 to-indigo-800' : 'from-pitch-600 to-pitch-800'}`}>
                 <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                    <button onClick={() => startEditing(player)} className="p-1.5 bg-white/20 text-white hover:bg-white hover:text-brand-600 rounded backdrop-blur-sm transition-colors" title="Editar">
                      <IconPencil className="w-3 h-3" />
@@ -578,6 +562,57 @@ export default function App() {
           );
         })}
       </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+        {/* Navbar */}
+        <nav className="sticky top-0 z-30 bg-pitch-600 text-white shadow-lg backdrop-blur-md bg-opacity-95">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                    <div className="flex items-center gap-2">
+                        <div className="bg-white p-1.5 rounded-full text-pitch-600">
+                           <IconBall className="w-6 h-6" />
+                        </div>
+                        <span className="font-black text-xl tracking-tight uppercase">Futbol Poli</span>
+                    </div>
+                    <div className="flex space-x-1 bg-pitch-800/30 p-1 rounded-lg">
+                        <button
+                            onClick={() => setActiveTab('dashboard')}
+                            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                                activeTab === 'dashboard' 
+                                ? 'bg-white text-pitch-600 shadow-sm' 
+                                : 'text-pitch-100 hover:bg-white/10 hover:text-white'
+                            }`}
+                        >
+                            <div className="flex items-center gap-2">
+                                <IconTrophy className="w-4 h-4" />
+                                <span>Dashboard</span>
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('players')}
+                            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                                activeTab === 'players' 
+                                ? 'bg-white text-pitch-600 shadow-sm' 
+                                : 'text-pitch-100 hover:bg-white/10 hover:text-white'
+                            }`}
+                        >
+                             <div className="flex items-center gap-2">
+                                <IconUsers className="w-4 h-4" />
+                                <span>Jugadores</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        {/* Main Content */}
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {activeTab === 'dashboard' ? renderDashboard() : renderPlayers()}
+        </main>
     </div>
   );
 }

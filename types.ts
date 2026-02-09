@@ -1,7 +1,7 @@
 export enum Position {
   GK = 'Portero',
   DEF = 'Defensa',
-  MID = 'Mediocampo',
+  MID = 'Mediocampista',
   FWD = 'Delantero'
 }
 
