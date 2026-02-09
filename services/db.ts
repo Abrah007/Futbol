@@ -2,9 +2,10 @@ import { createClient } from '@supabase/supabase-js';
 import { Player, Match } from '../types';
 
 // --- CONFIGURACIÓN DE SUPABASE ---
-// REEMPLAZA ESTOS VALORES CON LOS DE TU PROYECTO DE SUPABASE
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL || 'TU_URL_DE_SUPABASE_AQUI'; 
-const SUPABASE_KEY = process.env.VITE_SUPABASE_KEY || 'TU_CLAVE_ANON_PUBLIC_AQUI';
+// @ts-ignore
+const SUPABASE_URL = (import.meta as any).env.VITE_SUPABASE_URL || 'https://frykdjywsipexvsdoovq.supabase.co';
+// @ts-ignore
+const SUPABASE_KEY = (import.meta as any).env.VITE_SUPABASE_KEY || 'sb_publishable_WWhkNJpHWf_T9HT-xTAAgw_lVcVwobv';
 
 // Inicialización segura: Evita que la app se rompa si la URL no es válida aún
 let supabase: any = null;
